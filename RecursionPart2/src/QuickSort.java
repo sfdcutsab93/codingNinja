@@ -8,35 +8,37 @@ public class QuickSort {
         quickSort(a, pivotIndex+1, ei);
     }
 
-    public static int partition(int a[], int si, int ei){
-     int pivotElement = a[si];
-     int smallerNumCount = 0;
-     for(int i = si+1;i<=ei;i++){
-        if(a[i] < pivotElement){
-            smallerNumCount++;
+    public static int partition(int input[],int sI,int eI)
+    {
+        int pivot=input[sI];
+        int count=0;
+        for(int i=sI+1;i<=eI;i++)
+        {
+            if(input[i]<=pivot)
+                count++;
         }
-     }
-     int temp = a[si+smallerNumCount];
-     a[si+smallerNumCount] = pivotElement;
-     a[si] = temp;
-
-     int i = si;
-     int j = ei;
-     if(i<j){
-        if(a[i] < pivotElement){
-            i++;
-        }else if(a[j]>=pivotElement){
-            j--;
-        }else{
-            temp = a[i];
-            a[i] = a[j];
-            a[j] = temp;
-            i++;
-            j--;
+        int pivotPos=sI+count;
+        int temp=input[sI];
+        input[sI]=input[pivotPos];
+        input[pivotPos]=temp;
+        int i=sI;
+        int j=eI;
+        while(i<pivotPos && j>pivotPos)
+        {
+            if(input[i]<=input[pivotPos])
+                i++;
+            else if(input[j]>input[pivotPos])
+                j--;
+            else
+            {
+                int temp_=input[i];
+                input[i]=input[j];
+                input[j]=temp_;
+                i++;j--;
+                
+            }
         }
-        
-     }
-     return si + smallerNumCount;
+        return pivotPos;
     }
     public static void main(String[] args) {
         int a[] = {10,4,5,9,8,6,12,11,7};
